@@ -1,0 +1,10 @@
+#!/usr/bin/fish
+
+wl-paste --primary \
+    | hunspell -d en_US \
+    | awk -F': ' '/^&/{print $2}' \
+    | tr ', ' '\n' \
+    | grep -v '^$' \
+    | fuzzel --dmenu \
+    | tr -d '\n' \
+    | wtype -
